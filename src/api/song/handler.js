@@ -14,13 +14,15 @@ class SongHandler {
   async postHandler(request, h) {
     try {
       this._validator.validateSongPayload(request.payload);
-      const { title, year, genre, performer, duration } = request.payload;
+      const { title, year, genre, performer, duration, album_id } =
+        request.payload;
       const resultid = await this._services.add({
         title,
         year,
         genre,
         performer,
         duration,
+        album_id,
       });
 
       const response = h.response({

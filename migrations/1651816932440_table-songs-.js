@@ -3,7 +3,7 @@
 exports.shorthands = undefined;
 
 exports.up = (pgm) => {
-  pgm.createTable("songs", {
+  pgm.createTable("song", {
     id: {
       type: "VARCHAR(50)",
       primaryKey: true,
@@ -32,6 +32,11 @@ exports.up = (pgm) => {
       type: "VARCHAR(50)",
     },
   });
+  pgm.addConstraint(
+    "song",
+    "fk_song.album_id_album.id",
+    "FOREIGN KEY(album_id) REFERENCES album(id) ON DELETE CASCADE"
+  );
 };
 
 exports.down = (pgm) => {
